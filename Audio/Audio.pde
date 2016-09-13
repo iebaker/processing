@@ -21,14 +21,7 @@ PImage image;
 void setup() {
   size(600, 600);
   minim = new Minim(this);
-  //image = loadImage("/Users/ibaker/Desktop/veggies.png");
-  //image = loadImage("/Users/ibaker/Pictures/nyc - 6.jpg");
-  //image = loadImage("/Users/ibaker/Pictures/ldn2/4.jpg");
-  image = loadImage("/Users/ibaker/Downloads/lisafrank.jpg");
-  //image = loadImage("/Users/ibaker/Downloads/pollack.jpg");
-  //image = loadImage("/Users/ibaker/Downloads/octopus.jpg");
-  //image = loadImage("/Users/ibaker/Downloads/vangogh.jpg");
-  //image = loadImage("/Users/ibaker/Downloads/spectrum.jpg");
+  image = loadImage(/* SOME IMAGE FILE */);
   image.resize(600, 600);
   
   audioInput = minim.getLineIn(Minim.MONO, bufferSize, sampleRate);
