@@ -14,4 +14,7 @@ Clone of classic arcade game
 Screensaver style art program that displays a smoothly changing waveform
 
 ### Drawing
-Really simple art creation program 
+Really simple art creation program
+
+### Opal
+15-line long sketch that generates abstract opal-looking images 
