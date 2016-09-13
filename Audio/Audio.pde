@@ -21,7 +21,7 @@ PImage image;
 void setup() {
   size(600, 600);
   minim = new Minim(this);
-  image = loadImage(/* SOME IMAGE FILE */);
+  image = loadImage("wheat_fields.jpg");
   image.resize(600, 600);
   
   audioInput = minim.getLineIn(Minim.MONO, bufferSize, sampleRate);
@@ -43,8 +43,10 @@ void draw() {
     for(int x = 0; x < image.width; x++) {
       int loc = x + y * image.width;
       color pixelColor = image.pixels[loc];
-      //pixels[loc] = recolorBrightnessByFrequency(pixelColor);
-      pixels[loc] = recolorSaturationByFrequency(pixelColor);
+      pixels[loc] = recolorBrightnessByFrequency(pixelColor);
+      
+      // Uncomment to Change Saturation Instead
+      // pixels[loc] = recolorSaturationByFrequency(pixelColor);
     }
   }
   updatePixels();
