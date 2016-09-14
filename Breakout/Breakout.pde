@@ -4,11 +4,11 @@ PVector ballVelocity = new PVector(1, 3).mult(2);
 float paddlePosition = 300;
 float paddleWidth = 100;
 float paddleHeight = 20;
-float brickSpacing = 5;
+float brickSpacing = 2;
 float ballRadius = 5;
 
-float bricksAcross = 8;
-float bricksDown = 7;
+float bricksAcross = 15;
+float bricksDown = 20;
 float bricksHeight = 300;
 
 color ballColor = color(255, 50, 255);
@@ -74,15 +74,26 @@ void moveBall() {
 void checkIfBallHitBricks() {
   float brickWidth = (width - (brickSpacing * (bricksAcross + 1))) / bricksAcross;
   float brickHeight = (bricksHeight - (brickSpacing * (bricksDown + 1))) / bricksDown;
+  
   float ballPositionInColumn = ballPosition.x % (brickWidth + brickSpacing);
   float ballPositionInRow = ballPosition.y % (brickHeight + brickSpacing);
-  float spaceForBall = max(brickSpacing - ballRadius, 0);
-  if (ballPositionInColumn > spaceForBall && ballPositionInRow > spaceForBall) {
-    int brickIndexX = floor(ballPosition.x / (brickWidth + brickSpacing));
-    int brickIndexY = floor(ballPosition.y / (brickHeight + brickSpacing));
-    if (brickIndexX < bricksAcross && brickIndexY < bricksDown) {
-      brickHasBeenHit[brickIndexX][brickIndexY] = true;
-    }
+  
+  int brickIndexX = floor(ballPosition.x / (brickWidth + brickSpacing));
+  int brickIndexY = floor(ballPosition.y / (brickHeight + brickSpacing));
+  
+  boolean hitThisBrick = ballPositionInColumn + ballRadius > brickSpacing && ballPositionInRow + ballRadius > brickSpacing;
+  boolean hitLeftBrick = ballPositionInColumn - ballRadius < 0;
+  boolean hitUpBrick = ballPositionInRow - ballRadius < 0;
+  
+  if (hitThisBrick) hitBrick(brickIndexX, brickIndexY);
+  if (hitLeftBrick) hitBrick(brickIndexX - 1, brickIndexY);
+  if (hitUpBrick) hitBrick(brickIndexX, brickIndexY - 1);
+  if (hitLeftBrick && hitUpBrick) hitBrick(brickIndexX - 1, brickIndexY - 1);
+}
+
+void hitBrick(int x, int y) {
+  if (x < bricksAcross && y < bricksDown && x > -1 && y > -1) {
+    brickHasBeenHit[x][y] = true;
   }
 }
 
